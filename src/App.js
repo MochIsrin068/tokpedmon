@@ -1,25 +1,48 @@
-import logo from './logo.svg';
-import './App.css';
+import {ApolloClient, ApolloProvider, InMemoryCache} from '@apollo/client'
+import {Global} from '@emotion/react'
 
-function App() {
+import PokemonContextProvider from './context/PokemonContext'
+import Routes from './routes'
+
+const App = () => {
+  const client  = new ApolloClient({
+    uri : "https://graphql-pokeapi.vercel.app/api/graphql",
+    cache : new InMemoryCache()
+  })
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+    <ApolloProvider client={client}>
+        <Global 
+          styles={{
+            body : {
+              margin : 0,
+              padding : 0,
+              fontSize : 16,
+              fontFamily : 'Open Sans, sans-serif' 
+            },
+            button : {
+              outline: 'none',
+              border: 'none',
+            },
+            input : {
+              outline: 'none',
+              border: 'none',
+            },
+            'button:focus' : {
+              outline: 'none',
+              border: 'none',
+            },
+            'input:focus' : {
+              outline: 'none',
+              border: 'none',
+            }
+          }}
+        />
+        <PokemonContextProvider>
+          <Routes />
+        </PokemonContextProvider>
+    </ApolloProvider>
+  )
+} 
 
-export default App;
+export default App
