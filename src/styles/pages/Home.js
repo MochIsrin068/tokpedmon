@@ -19,7 +19,8 @@ export default class Home {
             alignItems : "center",
             justifyContent : "center",
             marginTop : 10,
-            padding : '16px 0'
+            padding : '16px 0',
+            marginBottom : 80
         }),
 
         button : css({
